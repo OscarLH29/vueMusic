@@ -1,0 +1,70 @@
+<template>
+    <div>
+        <v-app-bar app :color="bColor" :style="{backgroundColor: bColor}" >
+            <div class="d-flex align-center">
+                <v-img
+                        alt="Vuetify Logo"
+                        class="shrink mr-2" contain
+                        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+                        transition="scale-transition"
+                        width="40"
+                />
+                <div class="title white--text">
+                    Music • Vue
+                </div>
+            </div>
+
+            <v-spacer></v-spacer>
+
+            <v-btn text small class="white--text"
+                   v-for="(page, i) in links" :key="i"
+                   @click="redirect(page.link, page.color)"
+            >
+                {{ page.name }}
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <MenuDropdown :items="links"
+                          :color="bColor"
+                          @change-color="changeColor($event)"
+            />
+
+        </v-app-bar>
+    </div>
+</template>
+
+<script>
+    import MenuDropdown from './MenuDropdown';
+
+    export default {
+        name: 'NavBar',
+        props: {
+            msg: String
+        },
+        components: {
+            MenuDropdown
+        },
+        data: () => ({
+            links: [
+                { name: 'Home',   link: '/home'   , color: '#BA68C8' },
+                { name: 'Artist', link: '/artist' , color: '#E040FB'},
+                { name: 'Album',  link: '/album'  , color: '#EA80FC'},
+                { name: 'About',  link: '/about'  , color: '#AB47BC'},
+            ],
+            bColor: '#BA68C8'
+        }),
+        methods: {
+            changeColor(colorEvent){
+                this.bColor = colorEvent;
+            },
+            redirect(link, color){
+                this.bColor = color;
+                this.$router.push(link);
+            }
+        }
+    }
+</script>
+
+<style>
+</style>
