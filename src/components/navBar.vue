@@ -47,12 +47,12 @@
         },
         data: () => ({
             links: [
-                { name: 'Home',   link: '/home'   , color: '#BA68C8' },
-                { name: 'Artist', link: '/artist' , color: '#E040FB'},
-                { name: 'Album',  link: '/album'  , color: '#EA80FC'},
-                { name: 'About',  link: '/about'  , color: '#AB47BC'},
+                { name: 'Home',   link: '/home'   , color: '#1565C0' },
+                { name: 'Artist', link: '/artist' , color: '#00B0FF'},
+                { name: 'Album',  link: '/album'  , color: '#80D8FF'},
+                { name: 'About',  link: '/about'  , color: '#0091EA'},
             ],
-            bColor: '#BA68C8'
+            bColor: '#1565C0'
         }),
         methods: {
             changeColor(colorEvent){

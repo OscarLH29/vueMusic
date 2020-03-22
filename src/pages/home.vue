@@ -22,12 +22,14 @@
                         </div>
                         <br><hr><br>
                         <div>
-                            <v-btn x-large :color="Pcolor" block>
+                            <v-btn x-large :color="Pcolor" block
+                                   @click="redirect('artist')">
                                 See more
                             </v-btn>
                             <v-spacer></v-spacer>
                             <br>
-                            <v-btn large :color="Scolor" block>
+                            <v-btn large :color="Scolor" block
+                                   @click="redirect('album')">
                                 See albums
                             </v-btn>
                         </div>
@@ -50,12 +52,14 @@
                             </div>
                             <hr><br>
                             <div>
-                                <v-btn small :color="Pcolor" block>
+                                <v-btn small :color="Pcolor" block
+                                       @click="redirect('artist')">
                                     See more
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <br>
-                                <v-btn small :color="Scolor" block>
+                                <v-btn small :color="Scolor" block
+                                       @click="redirect('album')">
                                     See albums
                                 </v-btn>
                             </div>
@@ -92,12 +96,14 @@
                             </div>
                             <hr><br>
                             <div>
-                                <v-btn small :color="Pcolor" block>
+                                <v-btn small :color="Pcolor" block
+                                        @click="redirect('artist')">
                                     See more
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 <br>
-                                <v-btn small :color="Scolor" block>
+                                <v-btn small :color="Scolor" block
+                                       @click="redirect('album')">
                                     See albums
                                 </v-btn>
                             </div>
@@ -115,9 +121,14 @@
         props: {
         },
         data: () => ({
-            Pcolor: '#BA68C8',
-            Scolor: '#EA80FC',
+            Pcolor: '#00B0FF',
+            Scolor: '#80D8FF',
         }),
+        methods: {
+            redirect(link) {
+                this.$router.push(`/${link}`);
+            }
+        }
     }
 </script>
 
