@@ -1,11 +1,5 @@
-const title = state => state.title;
-const year = state => state.year;
-const brandCompany = state => state.brandCompany;
-const song = state => state.song;
+const albumList = (state) => state.albumList;
 
 export default {
-    title,
-    year,
-    brandCompany,
-    song
+    albumList
 }
