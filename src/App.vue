@@ -14,6 +14,9 @@
     name: 'App',
     components: {
       NavBar
+    },
+    mounted() {
+      this.$store.dispatch('album/getIP')
     }
   };
 </script>

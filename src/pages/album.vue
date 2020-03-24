@@ -2,7 +2,7 @@
     <div>
         <v-card>
             <v-card-title>
-                Albums
+                Albums {{ ip }}
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -56,6 +56,21 @@
                     </v-dialog>
                 </v-toolbar>
             </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon
+                        small
+                        class="mr-2"
+                        @click="editItem(item)"
+                >
+                    mdi-pencil
+                </v-icon>
+                <v-icon
+                        small
+                        @click="deleteItem(item)"
+                >
+                    mdi-delete
+                </v-icon>
+            </template>
             </v-data-table>
         </v-card>
     </div>
@@ -70,6 +85,12 @@
         },
         data: () => ({
             headers: [
+                {
+                    text: 'ID',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id'
+                },
                 {
                     text: 'Title',
                     align: 'start',
@@ -88,31 +109,63 @@
                     sortable: false,
                     value: 'brandCompany'
                 },
+                {   text: 'Actions',
+                    align: 'start',
+                    value: 'actions',
+                    sortable: false
+                },
             ],
             search: null,
             dialog: false,
             editedItem: {
+                id: null,
                 title: null,
                 year: null,
                 brandCompany: null
-            }
+            },
+            defaultItem: {
+                id: null,
+                title: null,
+                year: null,
+                brandCompany: null
+            },
+            isEdit: false
         }),
         computed: { // getters & setters
             ...mapGetters({
-                albumList: 'album/albumList'
+                albumList: 'album/albumList',
+                ip: 'album/IP'
             })
         },
         methods: {
             close() {
                 this.dialog = false;
+                this.isEdit = false;
+                this.editedItem = Object.assign({}, this.defaultItem);
             },
             save() {
-                this.$store.dispatch('album/addAlbum', this.editedItem);
+                if (this.isEdit) {
+                    this.$store.dispatch('album/updateAlbum', this.editedItem);
+                } else {
+                    this.$store.dispatch('album/addAlbum', this.editedItem);
+                }
                 this.close();
+            },
+            editItem(item) {
+                this.editedItem.id = item.id;
+                this.editedItem.title = item.title;
+                this.editedItem.year = item.year;
+                this.editedItem.brandCompany = item.brandCompany;
+                this.dialog = true;
+                this.isEdit = true;
+            },
+            deleteItem(item) {
+                this.$store.dispatch('album/deleteAlbum', item.id);
             }
         },
         // lifecycle
         mounted() {
+            this.$store.dispatch('album/getAlbums');
         }
     }
 </script>
