@@ -4,7 +4,7 @@ import {apiGetIP} from "@/api/utilities";
 const getIP = (context) => {
     apiGetIP()
         .then( (response) => {
-            context.commit('GET_IP', response.data.ip);
+            context.commit('GET_IP', response.data.data[0].first_name);
         })
         .catch( (error) => {
             console.log(error);

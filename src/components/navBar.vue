@@ -51,6 +51,7 @@
                 { name: 'Artist', link: '/artist' , color: '#00B0FF'},
                 { name: 'Album',  link: '/album'  , color: '#80D8FF'},
                 { name: 'About',  link: '/about'  , color: '#0091EA'},
+                { name: 'Users',  link: '/users'  , color: '#00B0FF'},
             ],
             bColor: '#1565C0'
         }),

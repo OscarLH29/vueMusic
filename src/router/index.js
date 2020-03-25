@@ -6,6 +6,7 @@ import Home from '@/pages/home';
 import About from '@/pages/about';
 import Album from '@/pages/album';
 import Artist from '@/pages/artist';
+import Users from '@/pages/users';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ export default new VueRouter({
             path: "/artist",
             name: 'Artist',
             component: Artist
+        },
+        {
+            path: "/users",
+            name: 'Users',
+            component: Users
         }
     ],
     mode: 'history'
