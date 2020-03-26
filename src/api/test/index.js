@@ -13,6 +13,20 @@ const apiGetUser =() => {
 
 };
 
+const apiPostUser = (json) => {
+    return new Promise(  (resolve, reject) => {
+       axios.post('https://reqres.in/api/login', json)
+           .then( (response) => {
+               resolve(response);
+           })
+           .catch( (error) => {
+               console.log('error desde index')
+               reject(error);
+           })
+    });
+};
+
 export {
-    apiGetUser
+    apiGetUser,
+    apiPostUser
 }
