@@ -15,6 +15,7 @@
                         v-model="email"
                         label="E-mail"
                         required id="email"
+                        :rules="emailRules"
                 ></v-text-field>
 
                 <v-checkbox
@@ -58,29 +59,31 @@
             valid: true,
             checkbox: false,
             email: '',
+            emailRules: [
+                v => !!v || 'Email is required',
+            ],
             password: '',
             isLoading: false
         }),
         methods: {
-            getJson(){
-                let jsn = {
+            getData(){
+                let data = {
                     email: document.getElementById('email').value,
                     password: document.getElementById('pass').value
                 };
-                return jsn;
+                return data;
             },
             submit(){
                 this.isLoading = true;
-                let req = this.getJson();
+                let req = this.getData();
                 this.$store.dispatch('users/postUser', req);
                 setTimeout( () => {
                     if (this.login === null){
-                        alert('Error');
+                        alert('Error: failed to login');
                         window.location.reload();
                     } else if (this.login.status === 200){
                         alert(`Success, redirect, your token is: ${this.login.data.token}`);
                         this.$router.push('/home');
-                        window.location.reload();
                     }
                     this.isLoading = false;
                 }, 2500)

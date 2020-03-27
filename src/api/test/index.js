@@ -13,20 +13,67 @@ const apiGetUser =() => {
 
 };
 
-const apiPostUser = (json) => {
+const apiPostUser = (data) => {
     return new Promise(  (resolve, reject) => {
-       axios.post('https://reqres.in/api/login', json)
+       axios.post('https://reqres.in/api/login', data)
            .then( (response) => {
                resolve(response);
            })
            .catch( (error) => {
-               console.log('error desde index')
                reject(error);
            })
     });
 };
 
+//----------------------------------------------------------------------------------------
+const baseUrl = 'https://reqres.in';
+
+const getLoggin = (user) => {
+    return new Promise( (resolve, reject) => {
+        axios.post(`${baseUrl}/api/login`, user)
+            .then( (response) => {
+                resolve(response);
+            })
+            .catch( (error) => {
+                reject(error);
+            })
+    })
+};
+
+const apiGetUse = (id) => {
+    return new Promise( (resolve, reject) => {
+        axios.get(`${baseUrl}/api/users/${id}`)
+            .then( (response) => {
+                resolve(response);
+            })
+            .catch( (error) => {
+                reject(error);
+            })
+    });
+
+};
+
+const apiDeleteUser = (id) => {
+    return new Promise( (resolve, reject) => {
+       axios.delete(`${baseUrl}/api/users/${id}`)
+           .then( (response) => {
+              resolve(response)
+           })
+           .catch( (error) => {
+              reject(error)
+           })
+    });
+};
+
+//----------------------------------------------------------------------------------------
 export {
     apiGetUser,
-    apiPostUser
+    apiPostUser,
+
+
+    //---------------
+    getLoggin,
+    apiGetUse,
+
+    apiDeleteUser
 }

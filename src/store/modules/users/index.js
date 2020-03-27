@@ -4,7 +4,16 @@ import mutations from './mutations'
 
 const state = {
     userList: [],
-    login: null
+    login: null,
+
+
+    //----------------
+    isLoading: false,
+    isLogged: false,
+    user: null,
+    deleteU: null
+
+    //----------------
 };
 
 export default {

@@ -27,6 +27,7 @@
         methods: {
             redirect(link){
                 this.$router.push(link);
+                window.location.reload();
             }
         }
     }

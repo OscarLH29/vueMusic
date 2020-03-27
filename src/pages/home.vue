@@ -112,10 +112,14 @@
                 </v-container>
             </v-card>
         </v-col>
+        <hr><hr>
+        <Login></Login>
     </v-container>
 </template>
 
 <script>
+    import {Login} from '@/components';
+
     export default {
         name: 'Home',
         props: {
@@ -128,6 +132,9 @@
             redirect(link) {
                 this.$router.push(`/${link}`);
             }
+        },
+        components: {
+            Login
         }
     }
 </script>
@@ -151,7 +158,7 @@
         display: inline-block;
         left: 50%;
         position: absolute;
-        top: 46%;
+        top: 39%;
         width: 50%;
     }
 </style>

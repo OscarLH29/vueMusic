@@ -7,6 +7,7 @@ import About from '@/pages/about';
 import Album from '@/pages/album';
 import Artist from '@/pages/artist';
 import Users from '@/pages/users';
+import User from '@/pages/user';
 import Login from '@/pages/login';
 
 Vue.use(VueRouter);
@@ -46,6 +47,11 @@ export default new VueRouter({
             path: "/users",
             name: 'Users',
             component: Users
+        },
+        {
+            path: "/user/:id",
+            name: 'User',
+            component: User
         }
     ],
     mode: 'history'

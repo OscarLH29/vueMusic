@@ -1,6 +1,8 @@
-//
-import {apiGetUser} from "../../../api/test";
-import {apiPostUser} from "../../../api/test";
+import {apiGetUser, apiGetUse, apiDeleteUser} from "../../../api/test";
+import {apiPostUser, getLoggin} from "../../../api/test";
+//----------------------------------------------------------------
+
+//----------------------------------------------------------------
 
 const getUsers = (context) => {
     apiGetUser()
@@ -14,7 +16,7 @@ const getUsers = (context) => {
     ;
 };
 
-//
+// esta yo la hice :v
 
 const postUser = (context, user) => {
     apiPostUser(user)
@@ -27,13 +29,78 @@ const postUser = (context, user) => {
 
 };
 
-const getResponse = (context) => {
-    context.commit('GET_LOGIN');
+// ------------------------------------------------------------------------------------
+const updateIsLoading = (context) =>{
+    context.commit('UPDATE_IS_LOADING')
 };
 
+//const getLogin = (context, user) => {
+//    getLoggin(user)
+//        .then( () => {
+//            context.commit('UPDATE_IS_LOADING');
+//        })
+//        .catch( (error) => {
+//            console.log(error)
+//        })
+//};
+
+const getLogin = (context, user) => {
+    return new Promise( (resolve, reject) => {
+         getLoggin(user)
+             .then( (response) => {
+                 resolve(response)
+             }).catch( (error) => {
+                 reject(error)
+             })
+    })
+};
+
+const getUser = (context, id) => {
+    return new Promise((resolve, reject) => {
+        apiGetUse(id)
+            .then( (response) => {
+                console.log('1',response.data.data);
+                context.commit('GET_USER', response.data.data);
+                resolve();
+            })
+            .catch( (error) => {
+                console.log(error);
+                reject()
+            })
+        ;
+    });
+
+
+};
+
+
+const deleteUser = (context, id) => {
+    return new Promise( (resolve, reject) => {
+        apiDeleteUser(id)
+            .then( (response) => {
+                context.commit('DELETE_USER', response.status);
+                resolve()
+            })
+            .catch( () => {
+                reject()
+            })
+    });
+};
+
+
+
+
+// ------ ------------------------------------------------------------------------------
 
 export default {
     getUsers,
     postUser,
-    getResponse
+
+    //
+    updateIsLoading,
+    getLogin,
+    getUser,
+
+    deleteUser
+
 }

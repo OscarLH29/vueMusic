@@ -23,6 +23,38 @@
                 </v-sheet>
             </v-carousel-item>
         </v-carousel>
+        <hr><br>
+
+
+        <v-data-table   :headers="headers"
+                        :items="userList"
+                        :items-per-page="5"
+                        :search="search"
+                        class="elevation-1">
+
+            <template v-slot:item.actions="{ item }">
+                <v-icon small @click="goTo(item)"
+                        class="mr-2">
+                    mdi-pencil
+                </v-icon>
+                <v-icon small @click="delet(item)">
+                    mdi-delete
+                </v-icon>
+            </template>
+
+            <template v-slot:item.avatar="{ item }">
+                <v-avatar>
+                    <img :src="item.avatar" :alt="item.first_name">
+                </v-avatar>
+            </template>
+
+        </v-data-table>
+
+
+
+
+
+
     </div>
 </template>
 
@@ -42,12 +74,54 @@
                 'primary',
                 'deep-purple accent-4',
             ],
+            search: null,
+            headers: [
+                {
+                    text: 'ID',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id'
+                },
+                {
+                    text: 'Avatar',
+                    align: 'start',
+                    sortable: false,
+                    value: 'avatar'
+                },
+                {
+                    text: 'Email',
+                    align: 'start',
+                    sortable: false,
+                    value: 'email'
+                },
+                {
+                    text: 'First name',
+                    align: 'start',
+                    sortable: false,
+                    value: 'first_name'
+                },
+                {   text: 'Actions',
+                    align: 'start',
+                    value: 'actions',
+                    sortable: false
+                },
+            ],
+            dialog: false,
         }),
         methods: {
+            goTo(item) {
+                this.$router.push(`/user/${item.id}`)
+            },
+            delet(item){
+                this.$store.dispatch('users/deleteUser', item.id).then( () => {
+                    alert('Delete')
+                });
+            }
         },
         computed: { // getters & setters
             ...mapGetters({
-                userList: 'users/userList'
+                userList: 'users/userList',
+                deleteU: 'users/deleteU'
             })
         },
         // lifecycle
